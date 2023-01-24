@@ -1,13 +1,13 @@
 # Remember The Task
 Tick Tick application used to log the worked hours 
 
-#Team(Group 10)
+# Team(Group 10)
 -Harimol Sivadas
 -Harikrishnan Ponath Gopinadhan
 -Akhil Thomson Roy
 -Arjun Sumesh
 
-#Features
+# Features
 -Add a worked log
 -Edit the worked log
 -Delete the worked log
