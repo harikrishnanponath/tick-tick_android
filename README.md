@@ -2,10 +2,10 @@
 Tick Tick application used to log the worked hours 
 
 # Team(Group 10)
--Harimol Sivadas
--Harikrishnan Ponath Gopinadhan
--Akhil Thomson Roy
--Arjun Sumesh
+- Harimol Sivadas
+- Harikrishnan Ponath Gopinadhan
+- Akhil Thomson Roy
+- Arjun Sumesh
 
 # Features
 -Add a worked log
