@@ -1,5 +1,5 @@
 # Remember The Task
-Tick Tick application used to log the worked hours 
+A small offline app to log the work hours and to view total hours and total pay
 
 # Team(Group 10)
 - Harimol Sivadas
