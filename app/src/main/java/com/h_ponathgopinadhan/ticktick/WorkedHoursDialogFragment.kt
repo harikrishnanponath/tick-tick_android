@@ -50,6 +50,7 @@ class WorkedHoursDialogFragment : DialogFragment() {
                     val workedHours = workedHoursEditText.text.toString().toInt()
                     saveWorkedHours(requireContext(), date, workedHours)
                 }
+                    //negative Button
                 .setNegativeButton(R.string.cancel) { _, _ ->
                     dismiss()
                 }
