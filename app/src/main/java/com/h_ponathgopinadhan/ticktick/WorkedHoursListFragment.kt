@@ -1,5 +1,6 @@
 package com.h_ponathgopinadhan.ticktick
 
+
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,7 +39,7 @@ class WorkedHoursListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_worked_hours_list, container, false)
         workedHoursRecyclerView = view.findViewById(R.id.worked_hours_recycler_view)
         workedHoursRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = WorkedHoursAdapter(::onEditClick)
+        adapter = WorkedHoursAdapter(::onEditClick, ::onDeleteClick)
         workedHoursRecyclerView.adapter = adapter
 
         return view
@@ -95,7 +96,20 @@ class WorkedHoursListFragment : Fragment() {
     }
 
 
-
+    private fun onDeleteClick(date: String) {
+        val sharedPreferences = requireContext().getSharedPreferences("worked_hours", Context.MODE_PRIVATE)
+        val workedHoursMapType = object : TypeToken<HashMap<String, Int>>() {}.type
+        val workedHoursJson = sharedPreferences.getString("worked_hours_map", "{}")
+        val workedHoursMap = try {
+            Gson().fromJson<HashMap<String, Int>>(workedHoursJson, workedHoursMapType)
+        } catch (e: JsonSyntaxException) {
+            hashMapOf<String, Int>()
+        }
+        workedHoursMap.remove(date)
+        sharedPreferences.edit().putString("worked_hours_map", Gson().toJson(workedHoursMap)).apply()
+        adapter.setWorkedHours(workedHoursMap.toList().sortedBy { (d, _) ->
+            SimpleDateFormat("yyyy/MM/dd").parse(d)
+        }.reversed())
+        Toast.makeText(requireContext(), "Deleted worked hours for $date", Toast.LENGTH_SHORT).show()
+    }
 }
-
-

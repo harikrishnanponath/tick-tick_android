@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 
-class WorkedHoursAdapter (val onEditClick: (date: String, workedHours: Int) -> Unit) :
+class WorkedHoursAdapter (val onEditClick: (date: String, workedHours: Int) -> Unit, private val onDeleteClick: (date: String) -> Unit) :
     RecyclerView.Adapter<WorkedHoursViewHolder>() {
     private var workedHours = listOf<Pair<String, Int>>()
     private lateinit var listener: OnWorkedHoursClickListener
@@ -19,6 +19,9 @@ class WorkedHoursAdapter (val onEditClick: (date: String, workedHours: Int) -> U
         notifyDataSetChanged()
     }
 
+    fun setOnWorkedHoursClickListener(listener: OnWorkedHoursClickListener) {
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkedHoursViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -37,12 +40,18 @@ class WorkedHoursAdapter (val onEditClick: (date: String, workedHours: Int) -> U
             onEditClick(date, workedHours)
         }
 
+        holder.itemView.findViewById<ImageButton>(R.id.deleteButton).setOnClickListener {
+            onDeleteClick(date)
+        }
     }
+
+
 
     override fun getItemCount() = workedHours.size
 
     interface OnWorkedHoursClickListener {
         fun onWorkedHoursClick(date: String, workedHours: Int)
+
     }
 }
 
@@ -51,6 +60,8 @@ class WorkedHoursAdapter (val onEditClick: (date: String, workedHours: Int) -> U
 class WorkedHoursViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val dateTextView = view.findViewById<TextView>(R.id.date_text_view)
     private val workedHoursTextView = view.findViewById<TextView>(R.id.worked_hours_text_view)
+    val editButton = view.findViewById<ImageButton>(R.id.editButton)
+    val deleteButton = view.findViewById<ImageButton>(R.id.deleteButton)
 
     fun bind(date: String, workedHours: Int) {
         dateTextView.text = date
