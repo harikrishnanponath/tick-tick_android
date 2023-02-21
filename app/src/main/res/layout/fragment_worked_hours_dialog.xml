@@ -10,14 +10,14 @@
         android:id="@+id/worked_hours_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Worked Hours"
-        android:inputType="number" />
+        android:hint="Enter your Total Shift Hours"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/break_hours_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Break Hours"
-        android:inputType="number" />
+        android:inputType="numberDecimal"  />
 
 </LinearLayout>

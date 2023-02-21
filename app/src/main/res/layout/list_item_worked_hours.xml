@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="18dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="18dp">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="18dp"
+    app:cardBackgroundColor="#808080"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="18dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,19 +22,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/worked_hours_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/break_hours_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/total_worked_hours_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,15 +56,17 @@
                 android:id="@+id/editButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/limegreen"
                 android:src="@android:drawable/ic_menu_edit" />
 
             <ImageButton
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#FF4500"
                 android:src="@android:drawable/ic_menu_delete" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

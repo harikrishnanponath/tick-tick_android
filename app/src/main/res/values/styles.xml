@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FuturisticTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/futuristic_primary</item>
+        <item name="colorPrimaryVariant">@color/futuristic_primary_variant</item>
+        <item name="colorOnPrimary">@color/futuristic_on_primary</item>
+        <item name="colorSecondary">@color/futuristic_secondary</item>
+        <item name="colorSecondaryVariant">@color/futuristic_secondary_variant</item>
+        <item name="colorOnSecondary">@color/futuristic_on_secondary</item>
+        <item name="android:windowBackground">@color/futuristic_background</item>
+        <item name="android:textColor">@color/futuristic_text</item>
+        <item name="android:textColorSecondary">@color/futuristic_text_secondary</item>
+        <item name="android:colorControlNormal">@color/futuristic_control_normal</item>
+        <item name="android:colorControlActivated">@color/futuristic_control_activated</item>
+        <item name="android:colorControlHighlight">@color/futuristic_control_highlight</item>
+        <item name="android:dateTextAppearance">@color/white</item>
+    </style>
+
+    <style name="CalendarStyle" parent="Widget.MaterialComponents.MaterialCalendar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
+        <item name="android:textColorTertiary">@android:color/darker_gray</item>
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorAccent">@android:color/holo_green_light</item>
+    </style>
+
+</resources>
+
