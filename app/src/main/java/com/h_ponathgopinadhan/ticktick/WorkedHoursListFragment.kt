@@ -49,38 +49,41 @@ class WorkedHoursListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val sharedPreferences = requireContext().getSharedPreferences("worked_hours", Context.MODE_PRIVATE)
-        val workedHoursMapType = object : TypeToken<HashMap<String, Int>>() {}.type
+        val workedHoursMapType = object : TypeToken<HashMap<String, Pair<Int, Int>>>() {}.type
         val workedHoursJson = sharedPreferences.getString("worked_hours_map", "{}")
         val workedHoursMap = try {
-            Gson().fromJson<HashMap<String, Int>>(workedHoursJson, workedHoursMapType)
+            Gson().fromJson<HashMap<String, Pair<Int, Int>>>(workedHoursJson, workedHoursMapType)
         } catch (e: JsonSyntaxException) {
-            hashMapOf<String, Int>()
+            hashMapOf<String, Pair<Int, Int>>()
         }
         adapter.setWorkedHours(workedHoursMap.toList().sortedBy { (date, _) ->
             SimpleDateFormat("yyyy/MM/dd").parse(date)
         }.reversed())
     }
 
-    private fun onEditClick(date: String, workedHours: Int) {
+    private fun onEditClick(date: String, workedHours: Int, breakHours: Int) {
         val builder = AlertDialog.Builder(requireContext())
         val dialogView = layoutInflater.inflate(R.layout.fragment_edit_dialog, null)
         builder.setView(dialogView)
         val workedHoursEditText = dialogView.findViewById<EditText>(R.id.editWorkedHours)
+        val breakHoursEditText = dialogView.findViewById<EditText>(R.id.editBreakHours)
         workedHoursEditText.setText(workedHours.toString())
+        breakHoursEditText.setText(breakHours.toString())
         builder.setPositiveButton("Edit") { _, _ ->
             val newWorkedHours = workedHoursEditText.text.toString().toIntOrNull()
-            if (newWorkedHours == null) {
-                Toast.makeText(requireContext(), "Invalid worked hours", Toast.LENGTH_SHORT).show()
+            val newBreakHours = breakHoursEditText.text.toString().toIntOrNull()
+            if (newWorkedHours == null || newBreakHours == null) {
+                Toast.makeText(requireContext(), "Invalid hours", Toast.LENGTH_SHORT).show()
             } else {
                 val sharedPreferences = requireContext().getSharedPreferences("worked_hours", Context.MODE_PRIVATE)
-                val workedHoursMapType = object : TypeToken<HashMap<String, Int>>() {}.type
+                val workedHoursMapType = object : TypeToken<HashMap<String, Pair<Int, Int>>>() {}.type
                 val workedHoursJson = sharedPreferences.getString("worked_hours_map", "{}")
                 val workedHoursMap = try {
-                    Gson().fromJson<HashMap<String, Int>>(workedHoursJson, workedHoursMapType)
+                    Gson().fromJson<HashMap<String, Pair<Int, Int>>>(workedHoursJson, workedHoursMapType)
                 } catch (e: JsonSyntaxException) {
-                    hashMapOf<String, Int>()
+                    hashMapOf<String, Pair<Int, Int>>()
                 }
-                workedHoursMap[date] = newWorkedHours
+                workedHoursMap[date] = Pair(newWorkedHours, newBreakHours)
                 sharedPreferences.edit()
                     .putString("worked_hours_map", Gson().toJson(workedHoursMap))
                     .apply()
@@ -96,14 +99,15 @@ class WorkedHoursListFragment : Fragment() {
     }
 
 
+
     private fun onDeleteClick(date: String) {
         val sharedPreferences = requireContext().getSharedPreferences("worked_hours", Context.MODE_PRIVATE)
-        val workedHoursMapType = object : TypeToken<HashMap<String, Int>>() {}.type
+        val workedHoursMapType = object : TypeToken<HashMap<String, Pair<Int, Int>>>() {}.type
         val workedHoursJson = sharedPreferences.getString("worked_hours_map", "{}")
         val workedHoursMap = try {
-            Gson().fromJson<HashMap<String, Int>>(workedHoursJson, workedHoursMapType)
+            Gson().fromJson<HashMap<String, Pair<Int, Int>>>(workedHoursJson, workedHoursMapType)
         } catch (e: JsonSyntaxException) {
-            hashMapOf<String, Int>()
+            hashMapOf<String, Pair<Int, Int>>()
         }
         workedHoursMap.remove(date)
         sharedPreferences.edit().putString("worked_hours_map", Gson().toJson(workedHoursMap)).apply()
@@ -112,4 +116,6 @@ class WorkedHoursListFragment : Fragment() {
         }.reversed())
         Toast.makeText(requireContext(), "Deleted worked hours for $date", Toast.LENGTH_SHORT).show()
     }
+
+
 }
