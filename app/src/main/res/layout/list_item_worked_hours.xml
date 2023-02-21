@@ -13,7 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
 
 
         <TextView
@@ -25,6 +26,12 @@
 
         <TextView
             android:id="@+id/worked_hours_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/break_hours_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp" />
@@ -41,7 +48,12 @@
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_edit" />
 
-        </LinearLayout>
+            <ImageButton
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_delete" />
+    </LinearLayout>
 
 
 </LinearLayout>

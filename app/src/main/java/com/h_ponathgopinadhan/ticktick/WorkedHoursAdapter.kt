@@ -6,16 +6,21 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.*
 
 
+class WorkedHoursAdapter (
+    val onEditClick: (date: String, workedHours: Int, breakHours: Int) -> Unit,
+    val onDeleteClick: (date: String) -> Unit
+) : RecyclerView.Adapter<WorkedHoursViewHolder>() {
 
-class WorkedHoursAdapter (val onEditClick: (date: String, workedHours: Int) -> Unit) :
-    RecyclerView.Adapter<WorkedHoursViewHolder>() {
-    private var workedHours = listOf<Pair<String, Int>>()
-    private lateinit var listener: OnWorkedHoursClickListener
+    private var wHours = listOf<Triple<String, Int, Int>>()
 
-    fun setWorkedHours(workedHours: List<Pair<String, Int>>) {
-        this.workedHours = workedHours
+    fun setWorkedHours(workedHours: List<Pair<String, Pair<Int, Int>>>) {
+        this.wHours = workedHours.map { (date, hours) ->
+            Triple(date, hours.first, hours.second)
+        }
         notifyDataSetChanged()
     }
 
@@ -27,33 +32,44 @@ class WorkedHoursAdapter (val onEditClick: (date: String, workedHours: Int) -> U
     }
 
     override fun onBindViewHolder(holder: WorkedHoursViewHolder, position: Int) {
-        val (date, workedHours) = workedHours[position]
-        holder.bind(date, workedHours)
+        val (date, workedHours, breakHours) = wHours[position]
+        holder.bind(date, workedHours, breakHours)
         holder.itemView.setOnClickListener {
-            listener.onWorkedHoursClick(date, workedHours)
+            onEditClick(date, workedHours, breakHours)
         }
 
-        holder.itemView.findViewById<ImageButton>(R.id.editButton).setOnClickListener {
-            onEditClick(date, workedHours)
+        holder.editButton.setOnClickListener {
+            onEditClick(date, workedHours, breakHours)
         }
+
+        holder.deleteButton.setOnClickListener {
+            onDeleteClick(date)
+        }
+
+        val currentItem = wHours[position]
+
+        //deducting the break hour
+        val netWorkedHours = currentItem.second - currentItem.third
+
+        //total Worked hours calc
+        val totalWorkedHours = netWorkedHours
+        
 
     }
 
-    override fun getItemCount() = workedHours.size
-
-    interface OnWorkedHoursClickListener {
-        fun onWorkedHoursClick(date: String, workedHours: Int)
-    }
+    override fun getItemCount() = wHours.size
 }
 
-
-
 class WorkedHoursViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val dateTextView = view.findViewById<TextView>(R.id.date_text_view)
-    private val workedHoursTextView = view.findViewById<TextView>(R.id.worked_hours_text_view)
+    val dateTextView = view.findViewById<TextView>(R.id.date_text_view)
+    val workedHoursTextView = view.findViewById<TextView>(R.id.worked_hours_text_view)
+    val breakHoursTextView = view.findViewById<TextView>(R.id.break_hours_text_view)
+    val editButton = view.findViewById<ImageButton>(R.id.editButton)
+    val deleteButton = view.findViewById<ImageButton>(R.id.deleteButton)
 
-    fun bind(date: String, workedHours: Int) {
+    fun bind(date: String, workedHours: Int, breakHours: Int) {
         dateTextView.text = date
-        workedHoursTextView.text = "$workedHours hours"
+        workedHoursTextView.text = "Worked Hours: $workedHours hours"
+        breakHoursTextView.text = "Break Hours: $breakHours hours"
     }
 }
