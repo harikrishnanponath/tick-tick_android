@@ -1,0 +1,67 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How To Use My App"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/instructionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. First instruction goes here"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/instruction2TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2. Second instruction goes here"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/instruction3TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3. Third instruction goes here"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tipsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tips:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tip1TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. First tip goes here"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tip2TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2. Second tip goes here"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+</LinearLayout>

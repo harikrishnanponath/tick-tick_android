@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerInside"
+        android:src="@drawable/ticktick" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/app_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.5"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="A small offline app to log the work hours and to view total hours."
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/developers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="DEVELOPERS"
+        android:textSize="18sp"
+         />
+
+    <TextView
+        android:id="@+id/developer_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.5"
+        android:paddingTop="16dp"
+        android:text="Harikrishnan Ponath Gopinadhan\nHarimol Sivadas\nAkhil Thomson Roy\nArjun Sumesh"
+        android:textSize="18sp" />
+
+</LinearLayout>

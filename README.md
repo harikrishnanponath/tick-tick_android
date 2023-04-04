@@ -1,4 +1,4 @@
-# Remember The Task
+gi# Remember The Task
 A small offline app to log the work hours and to view total hours and total pay
 
 # Team(Group 10)

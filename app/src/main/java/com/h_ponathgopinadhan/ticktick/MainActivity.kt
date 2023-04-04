@@ -1,9 +1,11 @@
 package com.h_ponathgopinadhan.ticktick
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.CalendarView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -40,6 +42,31 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        //return super.onCreateOptionsMenu(menu)
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_how_to_use -> {
+                // Start the "How To Use" activity or fragment
+                val intent = Intent(this, HowToUse::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.about -> {
+                // Start the "How To Use" activity or fragment
+                val intent = Intent(this, About::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     fun showResults(){
         supportFragmentManager.beginTransaction()
