@@ -18,7 +18,7 @@ private const val ARG_PARAM2 = "param2"
 class WorkedHoursDialogFragment : DialogFragment() {
 
     private lateinit var date: String
-
+    private val mainActivity = MainActivity()
     companion object {
         fun newInstance(date: String): WorkedHoursDialogFragment {
             val workedHoursDialogFragment = WorkedHoursDialogFragment()
@@ -51,7 +51,7 @@ class WorkedHoursDialogFragment : DialogFragment() {
                     }else{
                     val workedHours = workedHoursEditText.text.toString().toFloat()
                     val breakHours = breakHoursEditText.text.toString().toFloat()
-                    if (workedHours == null || breakHours == null || workedHours >24 || breakHours> workedHours) {
+                    if (workedHours == null || breakHours == null || workedHours >24 || breakHours> workedHours || workedHours == breakHours) {
                         if (workedHours == null || breakHours == null) {
                             Toast.makeText(requireContext(), "Invalid hours", Toast.LENGTH_LONG)
                                 .show()
@@ -63,14 +63,20 @@ class WorkedHoursDialogFragment : DialogFragment() {
                         if (breakHours> workedHours){
                             Toast.makeText(requireContext(), "Your break hours cannot be more than shift hours!", Toast.LENGTH_LONG).show()
                         }
+                        if (workedHours == breakHours){
+                            Toast.makeText(requireContext(), "Your shift hours cannot be the same as break hours!", Toast.LENGTH_LONG).show()
+
+                        }
                         return@setPositiveButton
                     }
                     else {
+                        MainActivity.getInstance().showResults()
                         saveWorkedHours(requireContext(), date, workedHours, breakHours)
                     }
                     }
                 }
                 .setNegativeButton(R.string.cancel) { _, _ ->
+                    MainActivity.getInstance().showResults()
                     dismiss()
                 }
             builder.create()

@@ -3,6 +3,7 @@ package com.h_ponathgopinadhan.ticktick
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,13 @@ class WorkedHoursListFragment : Fragment() {
         return view
     }
 
+    //deleting all the entries
+    fun deleteAllEntries(){
+        val sharedPreferences = requireContext().getSharedPreferences("worked_hours", Context.MODE_PRIVATE)
+        sharedPreferences.edit().remove("worked_hours_map").apply()
+        adapter.setWorkedHours(emptyList())
+        Toast.makeText(requireContext(), "Deleted all worked hours", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -73,7 +81,7 @@ class WorkedHoursListFragment : Fragment() {
 
             val newWorkedHours = workedHoursEditText.text.toString().toFloat()
             val newBreakHours = breakHoursEditText.text.toString().toFloat()
-            if (newWorkedHours == null || newBreakHours == null || workedHours >24 || newBreakHours > newWorkedHours) {
+            if (newWorkedHours == null || newBreakHours == null || workedHours >24 || newBreakHours > newWorkedHours || newWorkedHours == newBreakHours) {
                 if (newWorkedHours == null) {
                     Toast.makeText(requireContext(), "Your shift hours cannot be empty, please enter a valid input!", Toast.LENGTH_LONG).show()
                 }
@@ -85,6 +93,10 @@ class WorkedHoursListFragment : Fragment() {
                 }
                 if (newBreakHours > newWorkedHours){
                     Toast.makeText(requireContext(), "Your break hours cannot be more than shift hours!", Toast.LENGTH_LONG).show()
+                }
+                if (newWorkedHours == newBreakHours){
+                    Toast.makeText(requireContext(), "Your shift hours cannot be the same as break hours!", Toast.LENGTH_LONG).show()
+
                 }
                 return@setPositiveButton
             } else {

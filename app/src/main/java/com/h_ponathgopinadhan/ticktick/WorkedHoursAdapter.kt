@@ -1,5 +1,6 @@
 package com.h_ponathgopinadhan.ticktick
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +16,14 @@ class WorkedHoursAdapter (
     val onDeleteClick: (date: String) -> Unit
 ) : RecyclerView.Adapter<WorkedHoursViewHolder>() {
 
-    private var wHours = listOf<Triple<String, Float, Float>>()
+    var wHours = listOf<Triple<String, Float, Float>>()
 
     fun setWorkedHours(workedHours: List<Pair<String, Pair<Float, Float>>>) {
         this.wHours = workedHours.map { (date, hours) ->
             Triple(date, hours.first, hours.second)
         }
+        //this.wHours = emptyList()
+       Log.i("Workwed", wHours.toString())
         notifyDataSetChanged()
     }
 
