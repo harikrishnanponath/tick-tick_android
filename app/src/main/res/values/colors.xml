@@ -13,7 +13,7 @@
 
 <!--My Custom Theme-->
 
-    <color name="futuristic_primary">#FF2196F3</color>
+    <color name="futuristic_primary">#000000</color>
     <color name="futuristic_primary_variant">#FF1976D2</color>
     <color name="futuristic_on_primary">#FFFFFFFF</color>
     <color name="futuristic_secondary">#FFFF4081</color>
